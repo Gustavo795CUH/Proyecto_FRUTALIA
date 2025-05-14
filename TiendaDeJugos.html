@@ -1,0 +1,336 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Jugos Hernández</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+        --naranja: #FFA500;
+        --mango: #FFB347;
+        --fresa: #FF4D6D;
+        --verde: #4caf50;
+        --piña: #FFE135;
+        --gris: #fdfcfb;
+        --sombra: rgba(0, 0, 0, 0.1);
+        --limon: #C7EA46;
+        }
+
+        body {
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(to right, #fff6c3, #ffe6e1);
+        margin: 0;
+        padding: 0;
+        color: #333;
+        }
+
+        .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 14px;
+        box-shadow: 0 5px 20px var(--sombra);
+        }
+
+        .encabezado {
+        text-align: center;
+        margin-bottom: 2rem;
+        }
+
+        .encabezado h1 {
+        font-size: 2rem;
+        color: var(--fresa);
+        margin-bottom: 0.5rem;
+        }
+
+        .encabezado h1 span {
+        color: var(--verde);
+        }
+
+        .encabezado p {
+        color: #555;
+        font-weight: 500;
+        }
+
+        .logo {
+        width: 64px;
+        height: 64px;
+        }
+
+        form.formulario {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        }
+
+        .campo label {
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--verde);
+        }
+
+        input, select, textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border-radius: 10px;
+        border: 2px solid var(--limon);
+        background-color: #fffaf2;
+        font-size: 1rem;
+        }
+
+        .btn-enviar, .btn-eliminar {
+        background-color: var(--fresa);
+        color: white;
+        border: none;
+        padding: 1rem;
+        font-size: 1rem;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out;
+        }
+
+        .btn-enviar:hover, .btn-eliminar:hover {
+        background-color: #e23e59;
+        }
+
+        .mensaje-exito {
+        text-align: center;
+        margin: 1rem 0;
+        color: var(--verde);
+        font-weight: bold;
+        }
+
+        .tarjetas-pedidos {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+        }
+
+        .tarjeta {
+        background: linear-gradient(135deg, var(--mango), var(--piña));
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px var(--sombra);
+        transition: transform 0.2s;
+        color: #222;
+        }
+
+        .tarjeta:hover {
+        transform: scale(1.02);
+        }
+
+        .tarjeta strong {
+        font-size: 1.1rem;
+        color: #c0392b;
+        }
+
+        .tarjeta small {
+        color: #555;
+        }
+
+        @media (max-width: 600px) {
+        .container {
+            padding: 1rem;
+        }
+
+        h1, h2 {
+            font-size: 1.5rem;
+        }
+        }
+    </style>
+    </head>
+    <body>
+    <main class="container">
+        <header class="encabezado">
+        <img src="https://img.icons8.com/color/96/fruit.png" alt="Frutalia Logo" class="logo"/>
+        <h1><i data-lucide="cup-straw"></i> JUGOS <span>HERNÁNDEZ</span></h1>
+        <p>¡Haz tu pedido y recógelo en solo 10 minutos!</p>
+        </header>
+
+        <form id="pedidoForm" class="formulario">
+        <div class="campo">
+            <label for="nombre"><i data-lucide="user"></i> Nombre del cliente:</label>
+            <input type="text" id="nombre" name="NOMBRE DEL CLIENTE" required>
+        </div>
+
+        <div class="campo">
+            <label for="telefono"><i data-lucide="phone"></i> Teléfono:</label>
+            <input type="tel" id="telefono" name="TELEFONO" required>
+        </div>
+
+        <div class="campo">
+            <label for="sabor"><i data-lucide="leaf"></i> Sabor del jugo:</label>
+            <select id="sabor" name="SABOR DEL JUGO" required>
+            <option value="naranja">Naranja</option>
+            <option value="mango">Mango</option>
+            <option value="fresa">Fresa</option>
+            <option value="piña">Piña</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="tamano"><i data-lucide="arrow-down-circle"></i> Tamaño:</label>
+            <select id="tamano" name="TAMAÑO" required>
+            <option value="chico">Chico</option>
+            <option value="mediano">Mediano</option>
+            <option value="grande">Grande</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="comentarios"><i data-lucide="message-square"></i> Comentarios:</label>
+            <textarea id="comentarios" name="COMENTARIOS ADICIONALES" rows="2" placeholder="Opcional..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-enviar">
+            <i data-lucide="plus-circle"></i> Agregar Pedido
+        </button>
+
+        <button type="button" class="btn-eliminar" id="btnEliminarTodos">
+            <i data-lucide="trash-2"></i> Eliminar Todos los Pedidos
+        </button>
+        </form>
+
+        <p id="mensaje" class="mensaje-exito"></p>
+
+        <section>
+        <h2><i data-lucide="clipboard-list"></i> Pedidos Registrados</h2>
+        <div id="listaPedidos" class="tarjetas-pedidos"></div>
+        </section>
+    </main>
+
+    <script>
+        const scriptURL = "https://script.google.com/macros/s/AKfycbyvjmyQ1alGzGAy80oNqvHg3UkWjtZzbiYhn69k9892UOO7q6xjr3zpw6ixC57wknTW/exec";
+        const form = document.getElementById("pedidoForm");
+        const mensaje = document.getElementById("mensaje");
+        const listaPedidos = document.getElementById("listaPedidos");
+        const btnEliminarTodos = document.getElementById("btnEliminarTodos");
+
+        form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(scriptURL, {
+            method: "POST",
+            body: formData,
+            });
+
+            if (response.ok) {
+            mensaje.textContent = "✅ Tu pedido ha sido enviado con éxito. ¡Gracias por preferirnos!";
+            form.reset();
+            obtenerPedidos();
+            } else {
+            mensaje.textContent = "❌ Error al enviar el pedido.";
+            }
+        } catch (error) {
+            mensaje.textContent = "❌ Error de conexión.";
+        }
+
+        setTimeout(() => (mensaje.textContent = ""), 5000);
+        });
+
+        async function obtenerPedidos() {
+        try {
+            const response = await fetch(scriptURL);
+            const data = await response.json();
+
+            listaPedidos.innerHTML = "";
+            data.forEach((pedido) => {
+            const tarjeta = document.createElement("div");
+            tarjeta.className = "tarjeta";
+            tarjeta.innerHTML = `
+                <p><strong>${pedido["NOMBRE DEL CLIENTE"]}</strong> <small>(${pedido["TELEFONO"]})</small></p>
+                <p>🥤 <b>Sabor:</b> ${pedido["SABOR DEL JUGO"]}</p>
+                <p>📏 <b>Tamaño:</b> ${pedido["TAMAÑO"]}</p>
+                <p>💬 <b>Comentarios:</b> ${pedido["COMENTARIOS ADICIONALES"] || "Sin comentarios"}</p>
+            `;
+            listaPedidos.appendChild(tarjeta);
+            });
+        } catch (error) {
+            console.error("Error al obtener pedidos:", error);
+        }
+        }
+
+        btnEliminarTodos.addEventListener("click", async () => {
+        const confirmar = confirm("¿Estás seguro de eliminar todos los pedidos?");
+        if (!confirmar) return;
+
+        const formData = new FormData();
+        formData.append("eliminar", "true");
+
+        try {
+            const response = await fetch(scriptURL, {
+            method: "POST",
+            body: formData,
+            });
+
+            if (response.ok) {
+            mensaje.textContent = "🗑️ Todos los pedidos han sido eliminados.";
+            obtenerPedidos();
+            } else {
+            mensaje.textContent = "❌ Error al eliminar los pedidos.";
+            }
+        } catch (error) {
+            mensaje.textContent = "❌ Error de conexión.";
+        }
+
+        setTimeout(() => (mensaje.textContent = ""), 5000);
+        });
+
+        obtenerPedidos();
+    </script>
+    <script>lucide.createIcons();</script>
+    </body>
+    </html>
+
+    <!-- Código de Google Apps Script asociado a la URL:
+    https://script.google.com/macros/s/AKfycbyvjmyQ1alGzGAy80oNqvHg3UkWjtZzbiYhn69k9892UOO7q6xjr3zpw6ixC57wknTW/exec -->
+
+    <!-- Google Apps Script:
+    function doPost(e) {
+    const ss = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1fe21eiJ43M4AeYaXLa-MpZ-r9zi8AJ6drCK3n_xKaIE/edit");
+    const sheet = ss.getSheetByName("Hoja 1");
+
+    if (e.parameter.eliminar === "true") {
+        const numRows = sheet.getLastRow();
+        if (numRows > 1) sheet.deleteRows(2, numRows - 1);
+        return ContentService.createTextOutput("Eliminado");
+    }
+
+    const data = [
+        e.parameter["NOMBRE DEL CLIENTE"],
+        e.parameter["TELEFONO"],
+        e.parameter["SABOR DEL JUGO"],
+        e.parameter["TAMAÑO"],
+        e.parameter["COMENTARIOS ADICIONALES"]
+    ];
+
+    sheet.appendRow(data);
+    return ContentService.createTextOutput("Pedido registrado");
+    }
+
+    function doGet() {
+    const ss = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1fe21eiJ43M4AeYaXLa-MpZ-r9zi8AJ6drCK3n_xKaIE/edit");
+    const sheet = ss.getSheetByName("Hoja 1");
+    const data = sheet.getDataRange().getValues();
+
+    const headers = data.shift();
+    const json = data.map(row => {
+        const obj = {};
+        row.forEach((cell, i) => obj[headers[i]] = cell);
+        return obj;
+    });
+
+    return ContentService.createTextOutput(JSON.stringify(json)).setMimeType(ContentService.MimeType.JSON);
+    }
+    -->
